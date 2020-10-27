@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+// models if we want to keep collection.
 const User = mongoose.model('User', userSchema);
 const Tweet = mongoose.model('Tweet', tweetSchema);
 module.exports = {

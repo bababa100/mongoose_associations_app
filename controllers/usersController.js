@@ -1,3 +1,5 @@
+const user = require('../models/user');
+
 const router = require('express').Router();
 const User = require('../models/user').User;
 const Tweet = require('../models/user').Tweet;
@@ -58,6 +60,8 @@ router.get('/:userId/tweets/:tweetId/edit', (req, res) => {
         });
     });
 });
+
+
 // UPDATE TWEET EMBEDDED IN A USER DOCUMENT
 router.put('/:userId/tweets/:tweetId', (req, res) => {
     console.log('PUT ROUTE');
@@ -89,6 +93,11 @@ router.delete('/:userId/tweets/:tweetId', (req, res) => {
             res.redirect(`/users/${foundUser.id}`);
         });
     });
+});
+router.delete("/id", (req, res) => {
+    const index = req.params.id
+    tweets.splice(index, 1);
+    res.redirect("tweets");
 });
 
 // allows express to export router routes

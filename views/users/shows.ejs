@@ -1,0 +1,17 @@
+<h1><%= album.name %>'s Detail Page</h1>
+<h4>Create a New Song</h4>
+<form action="/albums/<%= album.id %>/songs" method="POST">
+    <div class="form-group">
+        <label for="songText">Song Text</label>
+        <input type="text" class="form-control" id="songText" name="songText" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<h1>Songs</h1>
+
+<ul>
+    <% album.songs.forEach(songs => { %>
+    <li><%= song.songText %></li>
+    <% }) %>
+</ul>
