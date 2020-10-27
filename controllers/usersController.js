@@ -4,15 +4,26 @@ const router = require('express').Router();
 const User = require('../models/user').User;
 const Tweet = require('../models/user').Tweet;
 
-// NEW USER FORM.  Roter attaches all the routes together.
+
+//INDEX
+router.get('/', (req, res) => {
+    User.find({}, (error, allUsers) => {
+        res.render('users/index.ejs', {
+            users: allUsers,
+            name: 'David'
+
+        })
+    })
+})
+// NEW USER FORM.  Router attaches all the routes together.
 router.get('/new', (req, res) => {
     res.render('users/new.ejs');
 });
 
 // CREATE A NEW USER
 router.post('/', (req, res) => {
-    User.create(req.body, (error, user) => {
-        res.redirect(`/users/${user.id}`);
+    User.create(req.body, (error, users) => {
+        res.redirect(`/users/${users.id}`);
     });
 });
 
@@ -27,10 +38,10 @@ router.post('/:userId/tweets', (req, res) => {
 
 
     // find user in db by id and add new tweet
-    User.findById(req.params.userId, (error, user) => {
-        user.tweets.push(newTweet);
-        user.save((err, user) => {
-            res.redirect(`/users/${user.id}`);
+    User.findById(req.params.userId, (error, users) => {
+        users.tweets.push(newTweet);
+        users.save((err, users) => {
+            res.redirect(`/users/${users.id}`);
         });
     });
 });
@@ -38,9 +49,9 @@ router.post('/:userId/tweets', (req, res) => {
 // ADD EMPTY FORM TO USER SHOW PAGE TO ADD TWEET TO A USER
 router.get('/:userId', (req, res) => {
     // find user in db by id and add new tweet
-    User.findById(req.params.userId, (error, user) => {
+    User.findById(req.params.userId, (error, users) => {
         res.render('users/show.ejs', {
-            user
+            users
         });
     });
 });

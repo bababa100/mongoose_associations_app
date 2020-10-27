@@ -33,7 +33,7 @@ app.use(express.static('public')); //tells express to find the CSS static files 
 app.use(methodOverride('_method')); // tells express to override the method using query string
 // DATA models are singular
 // ABOVE our app.get()
-app.use('/user', require('./controllers/usersController'));
+app.use('/users', require('./controllers/usersController'));
 
 app.get('/', (req, res) => {
     res.render('home.ejs');
